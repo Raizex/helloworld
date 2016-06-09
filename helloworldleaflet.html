@@ -1,1 +1,58 @@
-<!DOCTYPE html><title>Simple Map</title><link href=http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css rel=stylesheet><script src=http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js></script><style>#mapid{position:absolute;top:0;bottom:0;width:99%;align-content:center}</style><div id=mapid></div><script>function onMapClick(a){popup.setLatLng(a.latlng).setContent("You clicked the map at "+a.latlng.toString()).openOn(mymap)}var mymap=L.map("mapid").setView([51.505,-.09],13);L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",{attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',maxZoom:18,id:"raizex.phme5pdk",accessToken:"pk.eyJ1IjoicmFpemV4IiwiYSI6ImNpbWRyZjNjeTAwOGZ1aWtrYnJuZ3licTIifQ.SxFXCV0iNMn5XUKz63AMYw"}).addTo(mymap);var marker=L.marker([51.5,-.09]).addTo(mymap),circle=L.circle([51.508,-.11],500,{color:"red",fillColor:"#f03",fillOpacity:.5}).addTo(mymap),polygon=L.polygon([[51.509,-.08],[51.503,-.06],[51.51,-.047]]).addTo(mymap);marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup(),circle.bindPopup("I am a circle."),polygon.bindPopup("I am a polygon.");var popup=L.popup();mymap.on("click",onMapClick)</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Map</title>
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+        <style>
+          #mapid {
+             position: absolute;
+             top: 0px; /* Header Height */
+             bottom: 0px; /* Footer Height */
+             width: 99%;
+             align-content: center;
+          }
+        </style>
+    </head>
+    <body>
+        <div id="mapid"></div>
+        <script>
+            var mymap = L.mapbox.map('mapid', 'mapbox.streets').setView([51.505, -0.09], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'raizex.phme5pdk',
+                accessToken: 'pk.eyJ1IjoicmFpemV4IiwiYSI6ImNpbWRyZjNjeTAwOGZ1aWtrYnJuZ3licTIifQ.SxFXCV0iNMn5XUKz63AMYw'
+            }).addTo(mymap);
+
+            var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+            var circle = L.circle([51.508, -0.11], 500, {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5
+            }).addTo(mymap);
+
+            var polygon = L.polygon([
+                    [51.509, -0.08],
+                    [51.503, -0.06],
+                    [51.51, -0.047]
+            ]).addTo(mymap);
+
+            marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+            circle.bindPopup("I am a circle.");
+            polygon.bindPopup("I am a polygon.");
+
+            var popup = L.popup();
+
+            function onMapClick(e) {
+                popup
+                    .setLatLng(e.latlng)
+                    .setContent("You clicked the map at " + e.latlng.toString())
+                    .openOn(mymap);
+            }
+
+            mymap.on('click', onMapClick);
+        </script>
+    </body>
+</html>
